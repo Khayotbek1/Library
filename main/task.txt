@@ -1,0 +1,11 @@
+Kutubxona nomli yangi loyiha boshlang. main nomli app yaratib quyidagi
+modellarni yarating:
+
+
+A) Talaba - ism, guruh, kurs, kitob_soni
+
+B) Muallif - ism, jins, tugilgan_sana, kitob_soni, tirik(True/False)
+C) Kitob - nom, janr, sahifa, muallif(Foreign Key)
+D) Admin Kutubxonachi) - ism, ish_vaqti
+E) Record - talaba(Foreign Key), kitob(Foreign Key), Admin(Foreign Key),
+olingan_sana, qaytarish_sana
