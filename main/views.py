@@ -4,7 +4,7 @@ from .models import *
 
 
 def home_view(request):
-    return  render(request, 'home.html')
+    return  render(request, 'index.html')
 
 
 def students_view(request):
