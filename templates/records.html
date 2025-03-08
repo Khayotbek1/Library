@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcha Recordlar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #e3e3e3;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        li:hover {
+            background: #d1d1d1;
+        }
+        .home-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .home-btn:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="/" class="home-btn">🏠 Bosh sahifa</a>
+    <h1>📜 Barcha Recordlar</h1>
+    <ul>
+        {% for record in records %}
+            <li>📖 <strong>{{ record.book.name }}</strong> - 👨‍🎓 {{ record.student.name }} - 📅 {{ record.date_received }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>
