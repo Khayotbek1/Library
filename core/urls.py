@@ -13,4 +13,9 @@ urlpatterns = [
     path('books/<int:book_id>/', book_detail, name='book_detail'),
     path('records/', record_view),
     path('alive_authors/', alive_authors),
+    path('top_3_books/', top_3_books),
+    path('oxirgi3ta_records/', last_3_records),
+    path('fiction_books/', fiction_books),
+    path('lib_admin/', library_admin),
+    path('lib_detail/<int:admin_id>/', admin_detail, name='admin_detail'),
 ]

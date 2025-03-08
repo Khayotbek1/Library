@@ -1,9 +1,8 @@
-
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Authors</title>
+        <title>Library Admins</title>
     </head>
     <body>
     <style>
@@ -52,11 +51,11 @@
         }
     </style>
 
-   <h1>Authors</h1>
-    <a href="/">Home page</a>
+   <h1>Barcha Adminlar</h1>
+    <a href="/">Bosh sahifa</a>
     <hr>
-    {% for author in authors %}
-        <a href="{% url 'author_detail' author.id %}">{{ author.name }}</a>
+    {% for admin in lib_admin %}
+        <a href="{% url 'admin_detail' admin.id %}">{{ admin.name }}</a>
     {% endfor %}
 
     </body>

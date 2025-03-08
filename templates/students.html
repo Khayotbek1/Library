@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Students</title>
-</head>
-<body>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,26 +35,57 @@
         a:hover {
             background-color: #0056b3;
         }
+
+        /* Student List */
         .students-list {
             list-style: none;
             padding: 0;
+            max-width: 600px;
+            margin: 20px auto;
         }
         .students-list li {
             background: white;
             margin: 10px auto;
-            padding: 10px;
-            width: 50%;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 80%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
         }
-    </style>
+        .students-list li:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
 
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
 
     <h1>Students</h1>
     <a href="/">Home page</a>
     <hr>
-    {% for student in students %}
-        <p>{{ forloop.counter }}. {{ student.name }}</p>
-    {% endfor %}
+
+    <ul class="students-list">
+        {% for student in students %}
+            <li>{{ forloop.counter }}. {{ student.name }}</li>
+        {% endfor %}
+    </ul>
+
 </body>
 </html>

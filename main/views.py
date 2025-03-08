@@ -45,3 +45,29 @@ def alive_authors(request):
     authors = Author.objects.filter(alive_or_dead=True)
     contex = {'authors': authors}
     return render(request, 'alive_authors.html', contex)
+
+def top_3_books(request):
+    books = Book.objects.order_by('-page')[:3]
+    contex = {'books': books}
+    return render(request, 'top_3_books.html', contex)
+
+def last_3_records(request):
+    records = Record.objects.order_by('-date_received')[:3]
+    contex = {'records': records}
+    return render(request, 'oxirgi3ta_records.html', contex)
+
+def fiction_books(request):
+    books = Book.objects.filter(genre='Badiiy')
+    contex = {'books': books}
+    return render(request, 'fiction_books.html', contex)
+
+def library_admin(request):
+    lib_admin = LibraryAdmin.objects.all()
+    context = {'lib_admin': lib_admin}
+    return render(request, 'lib_admin.html', context)
+
+def admin_detail(request, admin_id):
+    lib_admin = LibraryAdmin.objects.get(id=admin_id)
+    context = {'lib_admin': lib_admin}
+    return render(request, 'admin_detail.html', context)
+
