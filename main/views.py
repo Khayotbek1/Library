@@ -3,14 +3,36 @@ from django.http import HttpResponse
 from .models import *
 
 
+PAGES = [
+    {"name": "Students", "url": "/students"},
+    {"name": "Hamma mualliflarni chiqarish", "url": "/authors"},
+    {"name": "Hamma kitoblarni chiqarish", "url": "/books"},
+    {"name": "Hamma recordlarni chiqarish", "url": "/records"},
+    {"name": "Tirik mualliflarni chiqarish", "url": "/alive_authors"},
+    {"name": "Eng katta 3 ta kitob", "url": "/top_3_books"},
+    {"name": "Oxirgi 3 ta record", "url": "/oxirgi3ta_records"},
+    {"name": "Badiiy kitoblar", "url": "/fiction_books"},
+    {"name": "Barcha adminlar", "url": "/lib_admin"},
+]
+
 def home_view(request):
-    return  render(request, 'index.html')
+    query = request.GET.get("q", "").lower()
+    results = []
+
+    if query:
+        results = [page for page in PAGES if query in page["name"].lower()]
+
+    return render(request, 'index.html', {"results": results})
 
 
 def students_view(request):
     students = Student.objects.all()
+    search = request.GET.get('search')
+    if search is not None:
+        students = students.filter(name__contains=search)
     context = {
         'students': students,
+        'search': search,
     }
     return render (request, 'students.html', context)
 
@@ -38,7 +60,14 @@ def book_detail(request, book_id):
 
 def record_view(request):
     records = Record.objects.all()
-    contex = {'records': records}
+    search = request.GET.get('search')
+    if search is not None:
+        records = records.filter(student__name__contains=search)
+
+    contex = {
+        'records': records,
+        'search': search,
+    }
     return render(request, 'records.html', contex )
 
 def alive_authors(request):
@@ -81,4 +110,14 @@ def student_delete(request, student_id):
     student = Student.objects.get(id = student_id)
     student.delete()
     return redirect('students')
+
+def author_delete_confirm(request, author_id):
+    author = Author.objects.get(id = author_id)
+    context = {'author': author}
+    return render(request, 'author_delete_confirm.html', context)
+
+def author_delete(request, author_id):
+    author = Author.objects.get(id = author_id)
+    author.delete()
+    return redirect('authors')
 

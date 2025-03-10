@@ -7,7 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view),
     path('students/', students_view, name='students'),
-    path('authors/', authors_view),
+    path('authors/', authors_view, name='authors'),
     path('author/<int:author_id>/', author_detail, name='author_detail'),
     path('books/', book_view, name='book_view'),
     path('books/<int:book_id>/', book_detail, name='book_detail'),
@@ -20,4 +20,6 @@ urlpatterns = [
     path('lib_detail/<int:admin_id>/', admin_detail, name='admin_detail'),
     path('students/<int:student_id>/', student_detail),
     path('students/<int:student_id>/delete/', student_delete),
+    path('authors/<int:author_id>/delete-confirm/', author_delete_confirm, name='author_delete_confirm'),
+    path('authors/<int:author_id>/delete/', author_delete)
 ]

@@ -4,50 +4,6 @@
     <meta charset="UTF-8">
     <title>Home page</title>
     <style>
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes titleFade {
-            from {
-                transform: translateY(-30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes textFade {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -66,7 +22,6 @@
             left: 0;
             top: 0;
             overflow-y: auto;
-            animation: slideIn 0.7s ease-out;
             z-index: 10;
         }
 
@@ -76,8 +31,36 @@
             margin-bottom: 20px;
             border-bottom: 1px solid #555;
             padding-bottom: 10px;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-in-out 0.2s forwards;
+        }
+
+        .sidebar form {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .sidebar input {
+            width: 90%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+
+        .btn {
+            width: 95%;
+            margin-top: 5px;
+            padding: 8px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #d3d3d3;
+            color: #000000;
         }
 
         .sidebar a {
@@ -90,8 +73,6 @@
             border-radius: 5px;
             transition: all 0.3s;
             text-align: center;
-            opacity: 0;
-            animation: fadeIn 0.6s ease-in-out 0.4s forwards;
         }
 
         .sidebar a:hover {
@@ -99,54 +80,54 @@
             transform: translateX(10px);
         }
 
-
         .content {
             margin-left: 270px;
             padding: 40px;
             flex-grow: 1;
-            background: linear-gradient(to right, #ffffff, #f1f1f1);
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
             text-align: center;
-            animation: fadeIn 1s ease-in-out 0.6s forwards;
             width: calc(100% - 270px);
         }
-
 
         .content h2 {
             font-size: 28px;
             color: #333;
-            opacity: 0;
-            animation: titleFade 1s ease-in-out 0.8s forwards;
         }
 
         .content p {
             font-size: 18px;
             color: #555;
             margin-top: 10px;
-            opacity: 0;
-            animation: textFade 1s ease-in-out 1s forwards;
         }
 
-        .content:hover {
-            background: linear-gradient(to right, #f9f9f9, #e3e3e3);
-            transition: background 0.5s ease-in-out;
-        }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
         <h1>Library Project</h1>
-        <a href="/students">Students</a>
-        <a href="/authors">Hamma mualliflarni chiqarish</a>
-        <a href="/books">Hamma kitoblarni chiqarish</a>
-        <a href="/records">Hamma recordlarni chiqarish</a>
-        <a href="/alive_authors">Tirik mualliflarni chiqarish</a>
-        <a href="/top_3_books">Eng katta 3 ta kitob</a>
-        <a href="/oxirgi3ta_records">Oxirgi 3 ta record</a>
-        <a href="/fiction_books">Badiiy kitoblar</a>
-        <a href="/lib_admin">Barcha adminlar</a>
+
+        <!-- Search Form -->
+        <form method="GET">
+            <input type="text" name="q" placeholder="Qidiruv..." value="{{ request.GET.q }}">
+            <button class="btn" type="submit">🔍 Qidirish</button>
+        </form>
+
+        <!-- Qidiruv natijalari sidebar ichida -->
+        {% if results %}
+            {% for result in results %}
+                <a href="{{ result.url }}">{{ result.name }}</a>
+            {% endfor %}
+        {% else %}
+            <a href="/students">Students</a>
+            <a href="/authors">Hamma mualliflarni chiqarish</a>
+            <a href="/books">Hamma kitoblarni chiqarish</a>
+            <a href="/records">Hamma recordlarni chiqarish</a>
+            <a href="/alive_authors">Tirik mualliflarni chiqarish</a>
+            <a href="/top_3_books">Eng katta 3 ta kitob</a>
+            <a href="/oxirgi3ta_records">Oxirgi 3 ta record</a>
+            <a href="/fiction_books">Badiiy kitoblar</a>
+            <a href="/lib_admin">Barcha adminlar</a>
+        {% endif %}
     </div>
 
     <div class="content">

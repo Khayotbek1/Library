@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete {{ author.name }}</title>
+    <style>
+        /* Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Card Styling */
+        .card {
+            background: white;
+            padding: 20px;
+            width: 350px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Title */
+        .card h1 {
+            font-size: 18px;
+            color: #343a40;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            max-width: 250px; /* Tugmalar kengligini belgilash */
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            text-decoration: none;
+        }
+
+        .btn-cancel {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background: #495057;
+            transform: scale(1.02);
+        }
+
+        .btn-delete {
+            background: #c82333;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #a71d2a;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>“{{ author.name }}” ma'lumotlarini o‘chirmoqchimisiz?</h1>
+        <div class="button-container">
+            <a href="/authors/" class="btn btn-cancel">❌ Bekor qilish</a>
+            <a href="/authors/{{ author.id }}/delete/" class="btn btn-delete">🗑️ O‘chirish</a>
+        </div>
+    </div>
+
+</body>
+</html>

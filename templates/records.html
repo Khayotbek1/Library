@@ -52,8 +52,51 @@
         .home-btn:hover {
             background: #0056b3;
         }
-        .qaytar{
+        .qaytar {
             color: #0056b3;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: #2c3e50;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 200px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #007bff;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
@@ -62,9 +105,16 @@
 <div class="container">
     <a href="/" class="home-btn">🏠 Bosh sahifa</a>
     <h1>📜 Barcha Recordlar</h1>
+
+    <form>
+        <input type="text" name="search" {% if search %} value="{{ search }}" {% endif %} placeholder="Qidiruv...">
+        <button>🔍 Qidirish</button>
+    </form>
+
     <ul>
         {% for record in records %}
-            <li>📖 <strong>{{ record.book.name }}</strong> - 👨‍🎓 {{ record.student.name }} - 📅 {{ record.date_received }}</li>
+            <li>📖 <strong>{{ record.book.name }}</strong> - 👨‍🎓 {{ record.student.name }} - 📅 {{ record.date_received }}
+            </li>
             <li><strong class="qaytar">Qaytarish sanasi:</strong> - 🤝 {{ record.return_date }}</li>
         {% endfor %}
     </ul>

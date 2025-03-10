@@ -1,11 +1,8 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Authors</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Authors</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,50 +11,89 @@
             margin: 0;
             padding: 0;
         }
+
         h1 {
             background-color: #333;
             color: white;
             padding: 20px;
             margin: 0;
         }
+
         hr {
             width: 50%;
             border: 1px solid #ddd;
             margin: 20px auto;
         }
-        a {
-            text-decoration: none;
-            color: white;
-            background-color: #007BFF;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
+         .home-btn {
             display: inline-block;
-            transition: background 0.3s;
+            margin-bottom: 15px;
+             margin-top: 15px;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
         }
-        a:hover {
-            background-color: #0056b3;
+        .home-btn:hover {
+            background: #0056b3;
         }
+
         .authors-list {
             list-style: none;
             padding: 0;
         }
+
         .authors-list li {
             background: white;
             margin: 10px auto;
-            padding: 10px;
+            padding: 15px;
             width: 50%;
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
         }
     </style>
+</head>
+<body>
 
-   <h1>Authors</h1>
-    <a href="/">Home page</a>
+    <h1>Authors</h1>
+    <a href="/" class="home-btn">🏠 Bosh sahifa</a>
     <hr>
-    {% for author in authors %}
-        <a href="{% url 'author_detail' author.id %}">{{ author.name }}</a>
-    {% endfor %}
 
-    </body>
-  </html>
+    <ul class="authors-list">
+        {% for author in authors %}
+            <li>
+                <a class="author-name" href="{% url 'author_detail' author.id %}">{{ author.name }}</a>
+                <a href="{% url 'author_delete_confirm' author.id %}">
+                    <button class="btn-delete">❌ Delete</button>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
