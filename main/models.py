@@ -31,15 +31,16 @@ class Book(models.Model):
 
 class LibraryAdmin (models.Model):
     name = models.CharField(max_length=100)
-    working_hours = models.DateTimeField()
+    working_hours = models.TimeField(null=True)
+
 
     def __str__(self):
         return self.name
 
 class Record(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    admin = models.ForeignKey(LibraryAdmin, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True)
+    book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True)
+    admin = models.ForeignKey(LibraryAdmin, on_delete=models.SET_NULL, null=True, blank=True)
     date_received = models.DateField(auto_now_add=True)
     return_date = models.DateField(blank=True, null=True)
 

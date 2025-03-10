@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 
@@ -70,4 +70,15 @@ def admin_detail(request, admin_id):
     lib_admin = LibraryAdmin.objects.get(id=admin_id)
     context = {'lib_admin': lib_admin}
     return render(request, 'admin_detail.html', context)
+
+
+def student_detail(request, student_id):
+    student = Student.objects.get(id = student_id)
+    context = {'student': student}
+    return render(request, 'student.html', context)
+
+def student_delete(request, student_id):
+    student = Student.objects.get(id = student_id)
+    student.delete()
+    return redirect('students')
 
