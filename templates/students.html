@@ -26,6 +26,9 @@
         a {
             text-decoration: none;
         }
+        label{
+            color: #ffffff;
+        }
         .home {
             display: inline-block;
             margin-top: 15px;
@@ -155,10 +158,28 @@
     <a class="home" href="/">Home page</a>
     <hr>
 
+      <form method="post">
+          {% csrf_token %}
+        <label>Ism</label>
+          <input type="text" name="ism" placeholder="Ism kiriting..">
+
+          <label>Kurs</label>
+          <input type="text" name="kurs" placeholder="Kurs kiriting..">
+
+          <label>Guruh</label>
+          <input type="text" name="guruh" placeholder="Guruh kiriting..">
+
+          <label>Kitob soni</label>
+          <input type="number" name="kitob_soni" value="0">
+          <button>Qo'shish</button>
+    </form>
+
     <form>
         <input type="text" name="search" {% if search %} value="{{ search }}" {% endif %} placeholder="Qidiruv...">
         <button>🔍 Qidirish</button>
     </form>
+
+
 
     <ul class="students-list">
         {% for student in students %}

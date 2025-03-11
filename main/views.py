@@ -26,7 +26,16 @@ def home_view(request):
 
 
 def students_view(request):
+    if request.method == "POST":
+        Student.objects.create(
+            name=request.POST.get('ism'),
+            course=request.POST.get('kurs'),
+            group=request.POST.get('guruh'),
+            book_quantity=request.POST.get('kitob_soni')
+        )
+        return redirect('students')
     students = Student.objects.all()
+
     search = request.GET.get('search')
     if search is not None:
         students = students.filter(name__contains=search)
