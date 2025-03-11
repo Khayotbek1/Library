@@ -106,6 +106,11 @@ def student_detail(request, student_id):
     context = {'student': student}
     return render(request, 'student.html', context)
 
+def student_delete_confirm(request, student_id):
+    student = Student.objects.get(id=student_id)
+    context = {'student': student}
+    return render(request, 'student_delete_confirm.html', context)
+
 def student_delete(request, student_id):
     student = Student.objects.get(id = student_id)
     student.delete()
@@ -120,4 +125,5 @@ def author_delete(request, author_id):
     author = Author.objects.get(id = author_id)
     author.delete()
     return redirect('authors')
+
 

@@ -164,7 +164,7 @@
         {% for student in students %}
             <li>
                 <a class="student-link" href="/students/{{student.id}}/">{{ forloop.counter }}. {{ student.name }}</a>
-                <a href="/students/{{ student.id }}/delete/">
+                <a href="{% url 'student_delete_confirm' student.id %}">
                     <button class="delete-btn">Delete</button>
                 </a>
             </li>

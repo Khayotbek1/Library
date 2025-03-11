@@ -19,7 +19,8 @@ urlpatterns = [
     path('lib_admin/', library_admin),
     path('lib_detail/<int:admin_id>/', admin_detail, name='admin_detail'),
     path('students/<int:student_id>/', student_detail),
+    path('students/<int:student_id>/delete-confirm/', student_delete_confirm, name='student_delete_confirm'),
     path('students/<int:student_id>/delete/', student_delete),
     path('authors/<int:author_id>/delete-confirm/', author_delete_confirm, name='author_delete_confirm'),
-    path('authors/<int:author_id>/delete/', author_delete)
+    path('authors/<int:author_id>/delete/', author_delete),
 ]
