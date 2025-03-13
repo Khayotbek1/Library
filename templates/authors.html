@@ -76,6 +76,28 @@
         .btn-delete:hover {
             background: #c82333;
         }
+        .create-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    background: #28a745; /* Yashil rang */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.create-btn:hover {
+    background: #218838;
+}
+
+.create-btn:active {
+    transform: scale(0.95);
+}
+
     </style>
 </head>
 <body>
@@ -83,6 +105,11 @@
     <h1>Authors</h1>
     <a href="/" class="home-btn">🏠 Bosh sahifa</a>
     <hr>
+
+    <a href="create_author/">
+    <button class="create-btn">➕ Create author</button>
+    </a>
+
 
     <ul class="authors-list">
         {% for author in authors %}

@@ -28,10 +28,10 @@ def home_view(request):
 def students_view(request):
     if request.method == "POST":
         Student.objects.create(
-            name=request.POST.get('ism'),
-            course=request.POST.get('kurs'),
-            group=request.POST.get('guruh'),
-            book_quantity=request.POST.get('kitob_soni')
+            name = request.POST.get('ism'),
+            course = request.POST.get('kurs'),
+            group = request.POST.get('guruh'),
+            book_quantity = request.POST.get('kitob_soni')
         )
         return redirect('students')
     students = Student.objects.all()
@@ -52,6 +52,19 @@ def authors_view(request):
     }
 
     return render(request, 'authors.html', contex)
+
+
+def create_author(request):
+    if request.method == "POST":
+        Author.objects.create(
+            name = request.POST.get('ism'),
+            gender = request.POST.get('jins'),
+            date = request.POST.get('date'),
+            book_quantity = None if request.POST.get('kitob_soni') == '' else request.POST.get('kitob_soni'),
+            alive_or_dead =True if request.POST.get('tirik') == 'on' else False,
+        )
+        return redirect('authors')
+    return render(request, "create_author.html")
 
 def author_detail(request, author_id):
     author = Author.objects.get(id=author_id)
@@ -135,4 +148,29 @@ def author_delete(request, author_id):
     author.delete()
     return redirect('authors')
 
+def create_record(request):
+    if request.method == "POST":
+        Record.objects.create(
+            student = Student.objects.get(id = request.POST.get('talaba_id')),
+            book = Book.objects.get(id = request.POST.get('kitob_id')),
+            admin = LibraryAdmin.objects.get(id = request.POST.get('admin_id')),
+            date_received = None if request.POST.get('topshirildi') == '' else request.POST.get('topshirildi'),
+            return_date = None if request.POST.get('qaytarish') == '' else request.POST.get('topshirildi'),
+        )
+        return redirect('records')
+    context = {
+        'admins' : LibraryAdmin.objects.all(),
+        'talabalar': Student.objects.all(),
+        'kitoblar': Book.objects.all()
+    }
+    return render (request, "create_record.html", context)
 
+
+def create_admin(request):
+    if request.method == "POST":
+        LibraryAdmin.objects.create(
+            name = request.POST.get('ism'),
+            working_hours = request.POST.get('ish_vaqti'),
+        )
+        return redirect('lib_admin')
+    return render(request, "create_admin.html")

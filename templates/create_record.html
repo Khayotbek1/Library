@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Record</title>
+    <style>
+        /* Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 20px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        select:focus, input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+            outline: none;
+        }
+
+        button {
+            background: #667eea;
+            color: #fff;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #667eea;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #764ba2;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Record qo'shish</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="talaba_id">Talaba</label>
+            <select name="talaba_id" id="talaba_id" required>
+                {% for talaba in talabalar %}
+                <option value="{{ talaba.id }}">{{ talaba.name }} {{ talaba.group }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="kitob_id">Kitob</label>
+            <select name="kitob_id" id="kitob_id" required>
+                {% for kitob in kitoblar %}
+                <option value="{{ kitob.id }}">{{ kitob.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="admin_id">Admin</label>
+            <select name="admin_id" id="admin_id" required>
+                {% for admin in admins %}
+                <option value="{{ admin.id }}">{{ admin.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="topshirildi">Topshirildi</label>
+            <input type="date" name="topshirildi" id="topshirildi" required>
+
+            <label for="qaytarish">Qaytarish</label>
+            <input type="date" name="qaytarish" id="qaytarish" required>
+
+            <button type="submit">Qo'shish</button>
+            <a href="records/">Ortga</a>
+        </form>
+    </div>
+
+</body>
+</html>

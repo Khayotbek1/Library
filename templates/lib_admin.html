@@ -53,6 +53,7 @@
 
    <h1>Barcha Adminlar</h1>
     <a href="/">Bosh sahifa</a>
+    <a href="create_admin">Admin qo'shish</a>
     <hr>
     {% for admin in lib_admin %}
         <a href="{% url 'admin_detail' admin.id %}">{{ admin.name }}</a>

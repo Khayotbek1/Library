@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muallif qo'shish</title>
+    <style>
+        /* Umumiy stillar */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus {
+            border-color: #74ebd5;
+            box-shadow: 0px 0px 5px #74ebd5;
+            outline: none;
+        }
+
+        /* Radio tugmalar */
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+
+        .radio-group input {
+            display: none;
+        }
+
+        .radio-group label {
+            background: #e0e0e0;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .radio-group input:checked + label {
+            background: #74ebd5;
+            color: white;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+
+        /* Tugma */
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #74ebd5;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #000000;
+        }
+
+        button:hover {
+            background: #5ac0c0;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+.close_btn {
+    display: block; /* Tugmani block qilish */
+    width: calc(100% - 20px); /* Tugma konteynerga yopishib qolmasligi uchun */
+    padding: 10px;
+    background: #74ebd5;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 10px auto 0 auto; /* Markazga joylash */
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    text-align: center;
+    color: #000000;
+}
+
+.close_btn:hover {
+    background: #5ac0c0;
+}
+
+.close_btn:active {
+    transform: scale(0.95);
+}
+
+
+
+
+
+
+        /* Animatsiyalar */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+  <form method="post">
+    {% csrf_token %}
+    <h1>Muallif qo'shish</h1>
+
+    <label for="ism">Ism</label>
+    <input type="text" name="ism" id="ism" placeholder="Ism kiriting..." required>
+
+    <label>Jinsi</label>
+    <div class="radio-group">
+        <input type="radio" name="jins" value="Erkak" id="erkak" checked>
+        <label for="erkak">Erkak</label>
+
+        <input type="radio" name="jins" value="Ayol" id="ayol">
+        <label for="ayol">Ayol</label>
+    </div>
+
+    <label for="date">Tug'ilgan sana</label>
+    <input type="date" id="date" name="date">
+
+    <label for="kitob_soni">Kitob soni</label>
+    <input type="number" id="kitob_soni" name="kitob_soni" value="0">
+
+    <div class="checkbox-group">
+        <input type="checkbox" id="tirik" value="author_id" name="tirik">
+        <label for="tirik">Tirik</label>
+    </div>
+
+    <button type="submit">Qo'shish</button>
+
+    <a class="close_btn" href="author/">Ortga</a>
+  </form>
+
+</body>
+</html>

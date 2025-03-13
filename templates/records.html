@@ -39,19 +39,45 @@
             color: #ffffff;
             cursor: pointer;
         }
-        .home-btn {
+        .home-btn, .create_record {
             display: inline-block;
             padding: 10px 15px;
             margin-bottom: 20px;
             text-decoration: none;
-            background: #007bff;
-            color: white;
+            font-weight: bold;
             border-radius: 5px;
             transition: 0.3s;
         }
+
+        /* Bosh sahifa tugmasi */
+        .home-btn {
+            background: #007bff;
+            color: white;
+        }
         .home-btn:hover {
             background: #0056b3;
+            transform: scale(1.05);
         }
+        .home-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Yangi record tugmasi */
+        .create_record {
+            background: linear-gradient(135deg, #28a745, #218838);
+            color: white;
+            margin-left: 10px;
+            padding: 10px 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .create_record:hover {
+            background: linear-gradient(135deg, #218838, #1e7e34);
+            transform: scale(1.05);
+        }
+        .create_record:active {
+            transform: scale(0.95);
+        }
+
         .qaytar {
             color: #0056b3;
         }
@@ -104,6 +130,7 @@
 
 <div class="container">
     <a href="/" class="home-btn">🏠 Bosh sahifa</a>
+    <a class="create_record" href="create_record/">➕ Yangi record</a>
     <h1>📜 Barcha Recordlar</h1>
 
     <form>
