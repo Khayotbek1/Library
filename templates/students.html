@@ -41,57 +41,79 @@
         }
 
         /* Student List */
-        .students-list {
-            list-style: none;
-            padding: 0;
-            max-width: 600px;
-            margin: 20px auto;
-        }
-        .students-list li {
-            background: white;
-            margin: 10px auto;
-            padding: 15px;
-            width: 80%;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-size: 18px;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            animation: fadeIn 0.5s ease-in-out forwards;
-        }
-        .students-list li:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
+        /* Student List Styling */
+.students-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
 
-        /* Student Link */
-        .student-link {
-            color: #007BFF;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        .student-link:hover {
-            color: #0056b3;
-        }
+.students-list li {
+    background: white;
+    padding: 15px 20px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
 
-        /* Delete Button */
-        .delete-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-        .delete-btn:hover {
-            background-color: #c82333;
-            transform: scale(1.1);
-        }
+/* Student Link Styling */
+.student-link {
+    color: #007BFF;
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: left;
+    transition: color 0.3s;
+    padding-right: 15px;
+}
+
+.student-link:hover {
+    color: #0056b3;
+}
+
+/* Delete & Edit Buttons Styling */
+.delete-btn, .update-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-left: 10px;
+}
+
+.update-btn {
+    background-color: #007BFF;
+    padding: 8px 12px;
+}
+
+.update-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.1);
+}
+
+.update-btn:hover {
+    transform: scale(1.1);
+}
+
 
         /* Fade-in Animation */
         @keyframes fadeIn {
@@ -187,6 +209,10 @@
                 <a class="student-link" href="/students/{{student.id}}/">{{ forloop.counter }}. {{ student.name }}</a>
                 <a href="{% url 'student_delete_confirm' student.id %}">
                     <button class="delete-btn">Delete</button>
+                </a>
+
+                <a href="/students/{{ student.id }}/update">
+                    <button class="update-btn">Edit</button>
                 </a>
             </li>
         {% endfor %}

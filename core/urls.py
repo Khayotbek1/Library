@@ -26,4 +26,5 @@ urlpatterns = [
     path('authors/create_author/', create_author),
     path('records/create_record/', create_record),
     path('lib_admin/create_admin/', create_admin),
+    path('students/<int:student_id>/update/', student_update),
 ]

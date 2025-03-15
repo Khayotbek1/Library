@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
 
@@ -174,3 +174,16 @@ def create_admin(request):
         )
         return redirect('lib_admin')
     return render(request, "create_admin.html")
+
+
+def student_update(request, student_id) :
+        student = get_object_or_404(Student, id = student_id)
+        if request.method == "POST":
+            student.name = request.POST.get('ism')
+            student.course = request.POST.get('kurs')
+            student.group = request.POST.get('guruh')
+            student.book_quantity = None if request.POST.get('kitob_soni') == '' else request.POST.get('kitob_soni')
+            student.save()
+            return redirect('students')
+        context = {'student': student}
+        return render(request, 'student_update.html', context)
