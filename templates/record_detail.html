@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Detail</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: scale(1.03);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            color: #444;
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .back-btn {
+            background: #007BFF;
+            color: white;
+        }
+        .back-btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+        .update-btn {
+            background: #28a745;
+            color: white;
+        }
+        .update-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+        }
+        .delete-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ record.student.name }}</h1>
+        <p><strong>📚 Kitob:</strong> {{ record.book.name }}</p>
+        <p><strong>👤 Admin:</strong> {{ record.admin.name }}</p>
+        <p><strong>📅 Berilgan sana:</strong> {{ record.date_received }}</p>
+        <p><strong>🔄 Qaytarish sana:</strong> {{ record.return_date }}</p>
+
+        <a href="/records" class="btn back-btn">⬅ Ortga</a>
+        <a href="/records/{{ record.id }}/update">
+            <button class="btn update-btn">✏ Edit</button>
+        </a>
+        <a href="{% url 'record_delete_confirm' record.id %}">
+            <button class="btn delete-btn">🗑 Delete</button>
+        </a>
+    </div>
+</body>
+</html>

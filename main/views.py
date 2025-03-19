@@ -1,3 +1,6 @@
+import datetime
+from time import timezone
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import *
@@ -155,7 +158,7 @@ def create_record(request):
             book = Book.objects.get(id = request.POST.get('kitob_id')),
             admin = LibraryAdmin.objects.get(id = request.POST.get('admin_id')),
             date_received = None if request.POST.get('topshirildi') == '' else request.POST.get('topshirildi'),
-            return_date = None if request.POST.get('qaytarish') == '' else request.POST.get('topshirildi'),
+            return_date = None if request.POST.get('qaytarish') == '' else request.POST.get('qaytarish'),
         )
         return redirect('records')
     context = {
@@ -187,3 +190,92 @@ def student_update(request, student_id) :
             return redirect('students')
         context = {'student': student}
         return render(request, 'student_update.html', context)
+
+
+def library_admin_update(request, admin_id):
+    lib_admin = get_object_or_404 (LibraryAdmin, id = admin_id)
+    if request.method == "POST":
+        lib_admin.name = request.POST.get('ism')
+        lib_admin.working_hours = request.POST.get('ish_vaqti')
+        lib_admin.save()
+        return redirect('lib_admin')
+    context = {
+        'lib_admin':lib_admin,
+    }
+    return render(request, 'lib_admin_update.html', context)
+
+def lib_admin_delete_confirm(request, admin_id):
+    lib_admin = LibraryAdmin.objects.get(id = admin_id)
+    context = {'lib_admin': lib_admin}
+    return render(request, 'lib_admin_delete_confirm.html', context)
+
+def lib_admin_delete(request, admin_id):
+    lib_admin = LibraryAdmin.objects.get(id = admin_id)
+    lib_admin.delete()
+    return redirect('lib_admin')
+
+
+def author_update(request, author_id):
+    author = get_object_or_404(Author, id=author_id)
+    if request.method == "POST":
+        author.name = request.POST.get('ism')
+        author.gender = request.POST.get('jins')
+        author.date = request.POST.get('tugilgan_sana')
+        author.book_quantity = request.POST.get('kitob_soni')
+        return redirect('authors')
+    context = {
+        'author': author,
+    }
+
+    return render(request, "author_update.html", context)
+
+def record_detail(request, record_id):
+    record = Record.objects.get(id = record_id)
+    context = {
+        'record': record,
+        'student': Student.objects.all(),
+        'book': Book.objects.all(),
+        'admin': LibraryAdmin.objects.all(),
+    }
+    return render(request, "record_detail.html", context)
+
+def record_delete_confirm(request, record_id):
+    record = Record.objects.get(id = record_id)
+    context = {
+        'record': record,
+        'student': Student.objects.all(),
+    }
+    return render(request, 'record_delete_confirm.html', context)
+
+def record_delete(request, record_id):
+    record = Record.objects.get(id = record_id)
+    return redirect('records')
+
+
+
+def record_update(request, pk):
+    record = get_object_or_404(Record, id = pk)
+
+    if request.method == "POST":
+        record.student = Student.objects.get(id = request.POST.get('student_id'))
+        record.book = Book.objects.get(id = request.POST.get('book_id'))
+        record.admin = LibraryAdmin.objects.get(id = request.POST.get('admin_id'))
+        record.date_received = datetime.datetime.now() if request.POST.get('olingan_sana') == "" else request.POST.get('olingan_sana')
+        record.return_date = request.POST.get('qaytarish_sana')
+        record.save()
+        return redirect('record_detail')
+
+    students = Student.objects.order_by('name')
+    books = Book.objects.order_by('name')
+    admins = LibraryAdmin.objects.order_by('name')
+
+    context = {
+        'record': record,
+        'students': students,
+        'books': books,
+        'admins': admins,
+    }
+
+
+    return render(request, 'record_update.html', context)
+

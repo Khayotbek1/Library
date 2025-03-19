@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        h1 {
+            color: #333;
+            font-size: 22px;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-save {
+            background: #28a745;
+            color: white;
+        }
+        .btn-save:hover {
+            background: #218838;
+        }
+        .btn-cancel {
+            background: #dc3545;
+            color: white;
+        }
+        .btn-cancel:hover {
+            background: #c82333;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>{{ record.student.name }} record ma'lumotlarini yangilash</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="student">Student:</label>
+        <select name="student_id" id="student">
+            {% for student in students %}
+                <option value="{{ student.id }}" {% if student == record.student %} selected {% endif %} disabled>
+                    {{ student.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="kitoblar">Kitob:</label>
+        <select name="book_id" id="kitoblar">
+            {% for book in books %}
+                <option value="{{ book.id }}" {% if book == record.book %} selected {% endif %} disabled>
+                    {{ book.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="admin">Admin:</label>
+        <select name="admin_id" id="admin">
+            {% for admin in admins %}
+                <option value="{{ admin.id }}" {% if admin == record.admin %} selected {% endif %} disabled>
+                    {{ admin.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="olingan_sana">Olingan sana:</label>
+        <input type="date" name="olingan_sana" id="olingan_sana" value="{{ record.date_received|date:'Y-m-d' }}">
+
+        <label for="qaytarish_sana">Qaytarish sanasi:</label>
+        <input type="date" name="qaytarish_sana" id="qaytarish_sana" value="{{ record.return_date|date:'Y-m-d' }}">
+
+        <div class="btn-container">
+            <a href="{% url 'record_detail' record.id %}" class="btn btn-cancel">❌ Bekor qilish</a>
+            <button type="submit" class="btn btn-save">✔️ Saqlash</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

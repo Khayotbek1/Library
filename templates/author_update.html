@@ -1,10 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author | Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #6a11cb;
+            box-shadow: 0px 0px 5px rgba(106, 17, 203, 0.5);
+            outline: none;
+        }
+        input[type="checkbox"] {
+            width: auto;
+        }
+        input[type="submit"] {
+            margin-top: 15px;
+            background: #6a11cb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+            transition: 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #2575fc;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .close_btn {
+            display: block; /* Tugmani block qilish */
+            width: calc(100% - 20px); /* Tugma konteynerga yopishib qolmasligi uchun */
+            padding: 10px;
+            background: #d3d3d3;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 10px auto 0 auto; /* Markazga joylash */
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+            color: #000000;
+        }
+
+.close_btn:hover {
+    background: #5ac0c0;
+}
+
+.close_btn:active {
+    transform: scale(0.95);
+}
+    </style>
 </head>
 <body>
-$END$
+    <form method="post">
+        {% csrf_token %}
+
+        <h1>{{ author.name }} ma'lumotlarini o'zgartirish</h1>
+
+        <label for="ism">Ism kiriting</label>
+        <input type="text" name="ism" id="ism" value="{{ author.name }}">
+
+        <label for="jins">Jinsi</label>
+        <select name="jins" id="jins">
+            <option value="{{ author.gender_choice }}">Erkak</option>
+            <option>Ayol</option>
+        </select>
+
+        <label for="tug'ilgan_sana">Tug'ilgan sana</label>
+        <input type="date" name="tugilgan_sana" id="tug'ilgan_sana" value="{{ author.date }}">
+
+        <label for="kitob_soni">Kitob soni</label>
+        <input type="number" name="kitob_soni" id="kitob_soni" value="{{ author.book_quantity }}">
+
+        <input type="checkbox" name="tirik" id="tirik" value="author_id">
+        <label for="tirik">Tirik</label>
+
+        <input type="submit" value="Yangilash">
+      <a class="close_btn" href="/authors/">Ortga</a>
+
+    </form>
 </body>
 </html>

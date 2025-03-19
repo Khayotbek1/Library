@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete {{ lib_admin.name }}</title>
+    <title>Delete {{ record.student.name }}</title>
     <style>
         /* Body Styling */
         body {
@@ -84,10 +84,10 @@
 <body>
 
     <div class="card">
-        <h1>“{{ lib_admin.name }}” ma'lumotlarini o‘chirmoqchimisiz?</h1>
+        <h1>“{{ record.student.name }}” ma'lumotlarini o‘chirmoqchimisiz?</h1>
         <div class="button-container">
-            <a href="/lib_admin/" class="btn btn-cancel">❌ Bekor qilish</a>
-            <a href="{% url 'lib_admin_delete' lib_admin.id %}" class="btn btn-delete">🗑️ O‘chirish</a>
+            <a href="{% url 'record_detail' record.id %}" class="btn btn-cancel">❌ Bekor qilish</a>
+            <a href="{% url 'record_delete' record.id %}" class="btn btn-delete">🗑️ O‘chirish</a>
         </div>
     </div>
 

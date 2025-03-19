@@ -27,4 +27,12 @@ urlpatterns = [
     path('records/create_record/', create_record),
     path('lib_admin/create_admin/', create_admin),
     path('students/<int:student_id>/update/', student_update),
+    path('lib_admin/<int:admin_id>/update/', library_admin_update, name= 'lib_admin_update'),
+    path('lib_admin/<int:admin_id>/delete-confirm/', lib_admin_delete_confirm, name='lib_admin_delete_confirm'),
+    path('lib_admin/<int:admin_id>/delete/', lib_admin_delete, name='lib_admin_delete'),
+    path('authors/<int:author_id>/update/', author_update, name='author_update'),
+    path('records/<int:record_id>/record_detail/', record_detail, name='record_detail'),
+    path('records/<int:record_id>/delete-confirm/', record_delete_confirm, name='record_delete_confirm'),
+    path('records/<int:record_id>/delete/', record_delete,  name='record_delete'),
+    path('records/<int:pk>/update/', record_update, name='record_update'),
 ]

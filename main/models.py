@@ -45,4 +45,4 @@ class Record(models.Model):
     return_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return f"Student: {self.student}\n Book: {self.book}\nDate received: {self.date_received}\n Return date: {self.return_date}"
+        return f"Student: {self.student}\n Book: {self.book}"

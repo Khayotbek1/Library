@@ -27,6 +27,9 @@
             list-style: none;
             padding: 0;
         }
+        a{
+            text-decoration: none;
+        }
         li {
             background: #e3e3e3;
             margin: 10px 0;
@@ -39,6 +42,14 @@
             color: #ffffff;
             cursor: pointer;
         }
+
+        li:hover strong{
+            color: yellow;
+        }
+        strong{
+            color: #000000;
+        }
+
         .home-btn, .create_record {
             display: inline-block;
             padding: 10px 15px;
@@ -140,9 +151,12 @@
 
     <ul>
         {% for record in records %}
-            <li>📖 <strong>{{ record.book.name }}</strong> - 👨‍🎓 {{ record.student.name }} - 📅 {{ record.date_received }}
+        <a href="{% url 'record_detail' record.id %}">
+            <li>
+                <strong>👨‍🎓 {{ record.student.name }}</strong> - 📖 {{ record.book.name }}
             </li>
-            <li><strong class="qaytar">Qaytarish sanasi:</strong> - 🤝 {{ record.return_date }}</li>
+        </a>
+
         {% endfor %}
     </ul>
 </div>

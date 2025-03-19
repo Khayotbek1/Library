@@ -1,10 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Update</title>
+    <style>
+        /* === Umumiy Sahifa Dizayni === */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        /* === Input maydonlari === */
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+        /* === Tugmalar Dizayni === */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel {
+            background: #6c757d;
+        }
+
+        .btn-cancel:hover {
+            background: #495057;
+        }
+
+        .btn-save {
+            background: #28a745;
+        }
+
+        .btn-save:hover {
+            background: #218838;
+        }
+    </style>
 </head>
 <body>
-$END$
+
+<div class="container">
+    <h1>✏️ {{lib_admin.name}} ma'lumotlarini tahrirlash</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="ism">Ism kiriting:</label>
+        <input type="text" name="ism" id="ism" value="{{lib_admin.name}}" required>
+
+        <label for="ish_vaqti">Ish vaqti:</label>
+        <input type="time" name="ish_vaqti" id="ish_vaqti" value="{{lib_admin.working_hours}}" required>
+
+        <div class="btn-container">
+            <a href="/lib_admin/" class="btn btn-cancel">❌ Bekor qilish</a>
+            <button type="submit" class="btn btn-save">✔️ Saqlash</button>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>
