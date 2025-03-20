@@ -86,7 +86,7 @@
         <label for="student">Student:</label>
         <select name="student_id" id="student">
             {% for student in students %}
-                <option value="{{ student.id }}" {% if student == record.student %} selected {% endif %} disabled>
+                <option value="{{ student.id }}" {% if student == record.student %} selected {% endif %}>
                     {{ student.name }}
                 </option>
             {% endfor %}
@@ -95,7 +95,7 @@
         <label for="kitoblar">Kitob:</label>
         <select name="book_id" id="kitoblar">
             {% for book in books %}
-                <option value="{{ book.id }}" {% if book == record.book %} selected {% endif %} disabled>
+                <option value="{{ book.id }}" {% if book == record.book %} selected {% endif %}>
                     {{ book.name }}
                 </option>
             {% endfor %}
@@ -104,7 +104,7 @@
         <label for="admin">Admin:</label>
         <select name="admin_id" id="admin">
             {% for admin in admins %}
-                <option value="{{ admin.id }}" {% if admin == record.admin %} selected {% endif %} disabled>
+                <option value="{{ admin.id }}" {% if admin == record.admin %} selected {% endif %}>
                     {{ admin.name }}
                 </option>
             {% endfor %}

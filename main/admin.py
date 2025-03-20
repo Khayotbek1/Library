@@ -19,6 +19,15 @@ class BookAdmin(admin.ModelAdmin):
 
 
 
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'course', 'group')
+    list_display_links = ('name',)
+    list_filter = ('name', 'group')
+    list_per_page = 7
+    search_fields = ('name', 'course', 'group')
+
+
+
 class BookInline(admin.TabularInline):
     model = Book
     extra = 3
@@ -27,6 +36,7 @@ class BookInline(admin.TabularInline):
 class AuthorAdmin(admin.ModelAdmin):
     inlines = (BookInline,)
 
+admin.site.register(Student, StudentAdmin)
 admin.site.register(Book,BookAdmin)
 admin.site.register(Author, AuthorAdmin)
 

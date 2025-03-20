@@ -263,7 +263,7 @@ def record_update(request, pk):
         record.date_received = datetime.datetime.now() if request.POST.get('olingan_sana') == "" else request.POST.get('olingan_sana')
         record.return_date = request.POST.get('qaytarish_sana')
         record.save()
-        return redirect('record_detail')
+        return redirect('record_detail', record.id)
 
     students = Student.objects.order_by('name')
     books = Book.objects.order_by('name')
@@ -275,7 +275,5 @@ def record_update(request, pk):
         'books': books,
         'admins': admins,
     }
-
-
     return render(request, 'record_update.html', context)
 
